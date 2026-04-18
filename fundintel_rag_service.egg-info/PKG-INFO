@@ -1,0 +1,120 @@
+Metadata-Version: 2.4
+Name: fundintel-rag-service
+Version: 0.1.0
+Summary: Production-grade facts-only RAG microservice for mutual fund FAQs.
+Requires-Python: <3.14,>=3.11
+Description-Content-Type: text/markdown
+Requires-Dist: fastapi<1.0.0,>=0.115.0
+Requires-Dist: uvicorn[standard]<1.0.0,>=0.32.0
+Requires-Dist: pydantic-settings<3.0.0,>=2.6.0
+Requires-Dist: orjson<4.0.0,>=3.10.0
+Requires-Dist: langchain-core<0.4.0,>=0.3.0
+Requires-Dist: langchain-community<0.4.0,>=0.3.0
+Requires-Dist: langchain-text-splitters<0.4.0,>=0.3.0
+Requires-Dist: langchain-groq<0.3.0,>=0.2.0
+Requires-Dist: fastembed>=0.4.0
+Requires-Dist: faiss-cpu<2.0.0,>=1.9.0
+Requires-Dist: httpx<0.28.0,>=0.27.0
+Requires-Dist: trafilatura<2.0.0,>=1.12.0
+Requires-Dist: pypdf<6.0.0,>=5.0.0
+Requires-Dist: prometheus-client<0.22.0,>=0.21.0
+Provides-Extra: dev
+Requires-Dist: pytest<9.0.0,>=8.3.0; extra == "dev"
+Requires-Dist: pytest-asyncio<0.25.0,>=0.24.0; extra == "dev"
+
+# FundIntel RAG Microservice
+
+FastAPI-based retrieval-augmented generation service for the Mutual Fund FAQ assistant. The service is designed for facts-only answers sourced from official Groww Mutual Fund, AMFI, and SEBI documents, with Groq used only for bounded answer synthesis after retrieval.
+
+## Architecture
+
+- FastAPI for the API surface and health endpoints.
+- LangChain for prompt orchestration and Groq integration.
+- FastEmbed plus FAISS for a lightweight local vector index.
+- Deterministic guardrails for PII rejection, advice refusal, performance refusal, and unsupported requests.
+- Single-source retrieval so every supported answer can return one official citation.
+
+## Project layout
+
+- `app/main.py`: application entrypoint.
+- `app/api/routes.py`: chat, health, and metrics routes.
+- `app/services/qa_service.py`: guardrails, retrieval, and Groq answer synthesis.
+- `app/ingestion/pipeline.py`: source fetching, chunking, and FAISS index build.
+- `data/sources/groww_sources.json`: allowlisted official-source manifest.
+
+## Setup
+
+1. Create a Python environment of your choice.
+2. Copy `.env.example` to `.env` and add your `GROQ_API_KEY`.
+3. Install dependencies with `pip install .[dev]`.
+4. Review `data/sources/groww_sources.json` and replace or enable verified Groww scheme URLs before ingestion.
+5. Build the local index with `python scripts/ingest.py`.
+6. Run the API with `uvicorn app.main:app --reload`.
+
+## Required manifest work
+
+The current implementation ships with official AMFI and SEBI fallback sources enabled, plus Groww placeholders that must be replaced with verified direct scheme or factsheet URLs before ingestion for production answers. This avoids hardcoding unverified scheme links.
+
+Recommended Groww source mix:
+
+- One direct scheme factsheet or scheme page per chosen scheme.
+- One KIM or SID document per chosen scheme when publicly available.
+- One official Groww help page for statement or tax document guidance.
+- One AMFI reference source.
+- One SEBI investor education source for refusal redirects.
+
+## API contract
+
+### `POST /v1/qa`
+
+Request:
+
+```json
+{
+  "question": "What is the expense ratio of the scheme?"
+}
+```
+
+Response:
+
+```json
+{
+  "request_id": "uuid",
+  "status": "answer",
+  "answer": "The expense ratio is ...",
+  "citation": {
+    "title": "Official source",
+    "url": "https://example.com",
+    "publisher": "GROWW",
+    "document_type": "factsheet",
+    "updated_at": "April 2026"
+  },
+  "last_updated_from_sources": "Last updated from sources: April 2026",
+  "refusal_reason": null,
+  "latency_ms": 912
+}
+```
+
+### `GET /v1/health/live`
+
+Basic process health.
+
+### `GET /v1/health/ready`
+
+Returns `503` until the Groq key is configured and the index has been built.
+
+### `GET /v1/metrics`
+
+Prometheus metrics endpoint.
+
+## Deployment notes
+
+- Render: deploy as a web service, add the environment variables from `.env.example`, and either bake a fresh index into the image or run ingestion in a build/predeploy step.
+- Railway: same model as Render; keep the index on the service filesystem or rebuild it during deploy.
+- Recommended Python runtime is `3.12` for broad dependency compatibility.
+
+## Known limits
+
+- No verified Groww scheme URLs are bundled yet, because they should be added only after manual confirmation.
+- The service is intentionally stateless and optimized for single-turn factual queries.
+- If retrieval cannot support a fact with one official source, the service returns insufficient data rather than synthesizing across multiple pages.
