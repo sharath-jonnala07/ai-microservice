@@ -85,6 +85,13 @@ class QAService:
             CHAT_REQUESTS.labels(status=response.status).inc()
             return response
 
+        # Prefer deterministic fact-table answers before requiring Groq or the vector index.
+        rule_based_response = self._try_fact_table(payload.question)
+        if rule_based_response is not None:
+            rule_based_response.latency_ms = int((time.perf_counter() - start) * 1000)
+            CHAT_REQUESTS.labels(status=rule_based_response.status).inc()
+            return rule_based_response
+
         if not self._settings.groq_api_key:
             response = ChatResponse(
                 status="error",
@@ -130,12 +137,6 @@ class QAService:
             response.latency_ms = int((time.perf_counter() - start) * 1000)
             CHAT_REQUESTS.labels(status=response.status).inc()
             return response
-
-        rule_based_response = self._try_fact_table(payload.question)
-        if rule_based_response is not None:
-            rule_based_response.latency_ms = int((time.perf_counter() - start) * 1000)
-            CHAT_REQUESTS.labels(status=rule_based_response.status).inc()
-            return rule_based_response
 
         retrieved = self._retriever.retrieve(payload.question)
         if retrieved is None:
