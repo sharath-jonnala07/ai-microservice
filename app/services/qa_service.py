@@ -12,8 +12,10 @@ from langchain_core.prompts import ChatPromptTemplate
 from app.core.config import Settings
 from app.core.telemetry import CHAT_REQUESTS, RETRIEVAL_MISSES
 from app.models.schemas import ChatRequest, ChatResponse, Citation, SourceRecord
-from app.services.guardrails import QuestionIntent, evaluate_question
+from app.services.fact_lookup import FactLookupService
+from app.services.guardrails import CONVERSATIONAL_RESPONSES, QuestionIntent, evaluate_question
 from app.services.prompts import REFUSAL_COPY, SYSTEM_PROMPT
+from app.services.question_classifier import classify_question
 from app.services.retrieval import SourceRetriever
 from app.services.source_manifest import load_source_manifest
 from app.services.vector_index import VectorIndexRepository
@@ -21,10 +23,7 @@ from app.services.vector_index import VectorIndexRepository
 
 LOGGER = logging.getLogger(__name__)
 SENTENCE_SPLIT = re.compile(r"(?<=[.!?])\s+")
-EXIT_LOAD_PATTERN = re.compile(
-    r"(?P<first>\d+(?:\.\d+)?%\s+if\s+redeemed/switched out[^\n]+?)\s+(?P<second>Nil\s*-?\s*if\s+redeemed/switched out[^\n]+?)(?:\s+Note:|\s+34\s+Section|$)",
-    re.IGNORECASE,
-)
+NAMED_SCHEME_PATTERN = re.compile(r"\b([A-Z][A-Za-z0-9&.-]*(?:\s+[A-Z][A-Za-z0-9&.-]*)*\s+(?:Fund|ETF|FOF))\b")
 
 
 class QAService:
@@ -32,7 +31,13 @@ class QAService:
         self._settings = settings
         self._repository = VectorIndexRepository(settings)
         self._retriever = SourceRetriever(self._repository, settings)
+        self._fact_lookup = FactLookupService()
         self._sources = {source.source_id: source for source in load_source_manifest(settings.source_manifest_path)}
+        self._supported_scheme_names = {
+            scheme_name.lower()
+            for source in self._sources.values()
+            for scheme_name in source.scheme_names
+        }
         self._llm: Any | None = None
         self._repository_load_attempted = False
         self._repository_lock = asyncio.Lock()
@@ -63,6 +68,19 @@ class QAService:
         decision = evaluate_question(payload.question)
         if decision.block:
             response = self._build_refusal(decision.reason or "unsupported_query")
+            response.latency_ms = int((time.perf_counter() - start) * 1000)
+            CHAT_REQUESTS.labels(status=response.status).inc()
+            return response
+
+        # Handle conversational queries (greetings, thanks, help) without RAG
+        if decision.intent == QuestionIntent.CONVERSATIONAL:
+            subtype = decision.reason or "greeting"
+            answer_text = CONVERSATIONAL_RESPONSES.get(subtype, CONVERSATIONAL_RESPONSES["greeting"])
+            response = ChatResponse(
+                status="answer",
+                answer=answer_text,
+                last_updated_from_sources="N/A — conversational response",
+            )
             response.latency_ms = int((time.perf_counter() - start) * 1000)
             CHAT_REQUESTS.labels(status=response.status).inc()
             return response
@@ -101,7 +119,19 @@ class QAService:
             CHAT_REQUESTS.labels(status=response.status).inc()
             return response
 
-        rule_based_response = self._build_rule_based_response(payload.question)
+        if not self._is_general_groww_query(payload.question) and self._question_has_out_of_scope_scheme(payload.question):
+            response = ChatResponse(
+                status="insufficient_data",
+                answer="I could not verify that because the current corpus is limited to the indexed Groww schemes only. Please ask about Groww Large Cap Fund, Groww ELSS Tax Saver Fund, Groww Banking and Financial Services Fund, or Groww Nifty 50 Index Fund.",
+                citation=self._fallback_citation(QuestionIntent.UNSUPPORTED),
+                last_updated_from_sources="Last updated from sources: current corpus limited to supported Groww schemes",
+                refusal_reason="out_of_scope_scheme",
+            )
+            response.latency_ms = int((time.perf_counter() - start) * 1000)
+            CHAT_REQUESTS.labels(status=response.status).inc()
+            return response
+
+        rule_based_response = self._try_fact_table(payload.question)
         if rule_based_response is not None:
             rule_based_response.latency_ms = int((time.perf_counter() - start) * 1000)
             CHAT_REQUESTS.labels(status=rule_based_response.status).inc()
@@ -203,107 +233,37 @@ class QAService:
             refusal_reason=reason,
         )
 
-    def _build_rule_based_response(self, question: str) -> ChatResponse | None:
-        lowered = question.lower()
-
-        if "exit load" in lowered:
-            match = self._find_chunk_match(
-                query=f"{question} exit load",
-                predicate=lambda text: "exit load" in text.lower() and "redeemed/switched out" in text.lower(),
-                limit=60,
-            )
-            if match is not None:
-                chunk, citation = match
-                extracted = EXIT_LOAD_PATTERN.search(" ".join(chunk.text.split()))
-                if extracted is not None:
-                    first = self._ascii_clean(extracted.group("first").strip().replace("NA", "NAV"))
-                    second = self._ascii_clean(extracted.group("second").strip().replace("NA", "NAV"))
-                    return ChatResponse(
-                        status="answer",
-                        answer=f"The exit load is {first}, and {second}.",
-                        citation=citation,
-                        last_updated_from_sources=f"Last updated from sources: {citation.updated_at}",
-                    )
-
-        if "minimum sip" in lowered:
-            for chunk in self._repository.all_chunks():
-                if not self._question_targets_scheme(question, chunk):
-                    continue
-                lowered_text = chunk.text.lower()
-                if "sip installments and amount" not in lowered_text and "minimum amount under daily sip facility" not in lowered_text:
-                    continue
-                normalized = " ".join(chunk.text.split())
-                daily = re.search(r"Daily[^0-9]+Rs\.?\s*(\d+)", normalized, re.IGNORECASE)
-                weekly = re.search(r"Weekly[^0-9]+Rs\.?\s*(\d+)", normalized, re.IGNORECASE)
-                monthly = re.search(r"Monthly[^0-9]+Rs\.?\s*(\d+)", normalized, re.IGNORECASE)
-                quarterly = re.search(r"Quarterly[^0-9]+Rs\.?\s*(\d+)", normalized, re.IGNORECASE)
-                if daily and weekly and monthly and quarterly:
-                    citation = self._citation_from_chunk(chunk)
-                    return ChatResponse(
-                        status="answer",
-                        answer=(
-                            f"The minimum SIP amount is Rs. {daily.group(1)} for daily and weekly SIPs, "
-                            f"and Rs. {monthly.group(1)} for monthly and quarterly SIPs."
-                        ),
-                        citation=citation,
-                        last_updated_from_sources=f"Last updated from sources: {citation.updated_at}",
-                    )
-
-        if "capital gains" in lowered or "account statement" in lowered or "statement" in lowered:
-            match = self._find_chunk_match(
-                query="account statement cas specific request pan updated statement request",
-                predicate=lambda text: "account statement" in text.lower() and "5 business days" in text.lower(),
-            )
-            if match is not None:
-                _, citation = match
-                return ChatResponse(
-                    status="answer",
-                    answer=(
-                        "Groww Mutual Fund says CAS is not sent for folios where PAN details are not updated, "
-                        "and on a specific request it provides the account statement within 5 business days."
-                    ),
-                    citation=citation,
-                    last_updated_from_sources=f"Last updated from sources: {citation.updated_at}",
-                )
-
-        return None
-
-    def _find_chunk_match(
-        self,
-        query: str,
-        predicate,
-        limit: int = 24,
-    ) -> tuple[Any, Citation] | None:
-        hits = self._repository.search(query, k=max(self._settings.retrieval_k * 3, limit))
-        for chunk, _score in hits:
-            if self._question_targets_scheme(query, chunk) and predicate(chunk.text):
-                return chunk, self._citation_from_chunk(chunk)
-        for chunk, _score in hits:
-            if predicate(chunk.text):
-                return chunk, self._citation_from_chunk(chunk)
-        for chunk in self._repository.all_chunks():
-            if self._question_targets_scheme(query, chunk) and predicate(chunk.text):
-                return chunk, self._citation_from_chunk(chunk)
-        for chunk in self._repository.all_chunks():
-            if predicate(chunk.text):
-                return chunk, self._citation_from_chunk(chunk)
-        return None
-
-    def _question_targets_scheme(self, question: str, chunk: Any) -> bool:
-        lowered = question.lower()
-        return any(scheme_name.lower() in lowered for scheme_name in chunk.scheme_names)
-
-    def _citation_from_chunk(self, chunk: Any) -> Citation:
-        return Citation(
-            title=chunk.source_title,
-            url=chunk.source_url,
-            publisher=chunk.authority.upper(),
-            document_type=chunk.document_type,
-            updated_at=chunk.published_at or "Last successful ingest",
+    def _try_fact_table(self, question: str) -> ChatResponse | None:
+        """Tier-1: deterministic lookup from pre-extracted fact table."""
+        classification = classify_question(question)
+        result = self._fact_lookup.lookup(classification)
+        if result is None:
+            return None
+        citation = Citation(
+            title=result.source_title,
+            url=result.source_url,
+            publisher="GROWW AMC",
+            document_type="fact_table",
+            updated_at="Pre-verified from official documents",
+        )
+        return ChatResponse(
+            status="answer",
+            answer=result.answer,
+            citation=citation,
+            last_updated_from_sources=f"Last updated from sources: {citation.updated_at}",
         )
 
-    def _ascii_clean(self, value: str) -> str:
-        return value.encode("ascii", "ignore").decode("ascii").strip()
+    @staticmethod
+    def _is_general_groww_query(question: str) -> bool:
+        lowered = question.lower()
+        return any(term in lowered for term in ("groww mutual fund", "groww mf", "groww amc"))
+
+    def _question_has_out_of_scope_scheme(self, question: str) -> bool:
+        lowered = question.lower()
+        if any(scheme_name in lowered for scheme_name in self._supported_scheme_names):
+            return False
+        candidates = [match.group(1).lower() for match in NAMED_SCHEME_PATTERN.finditer(question)]
+        return bool(candidates)
 
     def _fallback_citation(self, intent: QuestionIntent) -> Citation:
         fallback_source: SourceRecord | None = None

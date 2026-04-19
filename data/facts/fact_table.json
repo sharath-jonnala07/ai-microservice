@@ -1,0 +1,341 @@
+{
+  "Groww Large Cap Fund": {
+    "expense_ratio": {
+      "answer": "The Total Expense Ratio (TER) of Groww Large Cap Fund is 1.05% p.a. for Direct Plan and 2.25% p.a. for Regular Plan (as per revised TER notice).",
+      "source_id": "groww-ter-large-cap",
+      "source_title": "Notice - Change in TER - Groww Large Cap Fund",
+      "source_url": "https://assets-netstorage.growwmf.in/compliance_docs/Downloads/Expense%20Ratio/Notice%20-%20Change%20in%20TER/2025%20-%202026/06.%20Notice%20-%20Change%20in%20TER_Groww%20Large%20Cap%20Fund.pdf",
+      "updated_at": "2025-2026 TER notice"
+    },
+    "exit_load": {
+      "answer": "The exit load for Groww Large Cap Fund is 1% if redeemed/switched out within 7 days from the date of allotment, and Nil if redeemed/switched out after 7 days from the date of allotment.",
+      "source_id": "groww-sid-large-cap",
+      "source_title": "SID - Groww Large Cap Fund",
+      "source_url": "https://assets-netstorage.growwmf.in/compliance_docs/Downloads/SID/SID_Groww%20Large%20Cap%20Fund%20.pdf",
+      "updated_at": "Official SID PDF"
+    },
+    "benchmark": {
+      "answer": "The benchmark for Groww Large Cap Fund is NIFTY 100 - TRI (Total Return Index).",
+      "source_id": "groww-kim-large-cap",
+      "source_title": "KIM - Groww Large Cap Fund",
+      "source_url": "https://assets-netstorage.growwmf.in/compliance_docs/Downloads/KIM/KIM_Groww%20Largecap%20Fund.pdf",
+      "updated_at": "Official KIM PDF"
+    },
+    "riskometer": {
+      "answer": "The Riskometer of Groww Large Cap Fund is at Very High Risk. The Benchmark Riskometer is also at Very High Risk.",
+      "source_id": "groww-kim-large-cap",
+      "source_title": "KIM - Groww Large Cap Fund",
+      "source_url": "https://assets-netstorage.growwmf.in/compliance_docs/Downloads/KIM/KIM_Groww%20Largecap%20Fund.pdf",
+      "updated_at": "Official KIM PDF"
+    },
+    "min_sip": {
+      "answer": "The minimum SIP amount for Groww Large Cap Fund is Rs. 500 and in multiples of Rs. 500 thereafter.",
+      "source_id": "groww-kim-large-cap",
+      "source_title": "KIM - Groww Large Cap Fund",
+      "source_url": "https://assets-netstorage.growwmf.in/compliance_docs/Downloads/KIM/KIM_Groww%20Largecap%20Fund.pdf",
+      "updated_at": "Official KIM PDF"
+    },
+    "lock_in": {
+      "answer": "Groww Large Cap Fund has no lock-in period. Units can be redeemed at any time, subject to applicable exit load.",
+      "source_id": "groww-kim-large-cap",
+      "source_title": "KIM - Groww Large Cap Fund",
+      "source_url": "https://assets-netstorage.growwmf.in/compliance_docs/Downloads/KIM/KIM_Groww%20Largecap%20Fund.pdf",
+      "updated_at": "Official KIM PDF"
+    },
+    "fund_manager": {
+      "answer": "Groww Large Cap Fund is managed by Mr. Anupam Tiwari (Head - Equity, managing since May 11, 2023) and Mr. Saptarshee Chatterjee (Assistant Fund Manager - Equity, managing since September 24, 2025).",
+      "source_id": "groww-kim-large-cap",
+      "source_title": "KIM - Groww Large Cap Fund",
+      "source_url": "https://assets-netstorage.growwmf.in/compliance_docs/Downloads/KIM/KIM_Groww%20Largecap%20Fund.pdf",
+      "updated_at": "Official KIM PDF"
+    },
+    "investment_objective": {
+      "answer": "The primary investment objective of Groww Large Cap Fund is to seek to provide long-term capital appreciation from a portfolio that is invested predominantly in equity and equity-related securities of blue-chip large-cap companies.",
+      "source_id": "groww-kim-large-cap",
+      "source_title": "KIM - Groww Large Cap Fund",
+      "source_url": "https://assets-netstorage.growwmf.in/compliance_docs/Downloads/KIM/KIM_Groww%20Largecap%20Fund.pdf",
+      "updated_at": "Official KIM PDF"
+    },
+    "fund_type": {
+      "answer": "Groww Large Cap Fund is a Large Cap Fund — an open-ended equity scheme predominantly investing in large cap stocks.",
+      "source_id": "groww-kim-large-cap",
+      "source_title": "KIM - Groww Large Cap Fund",
+      "source_url": "https://assets-netstorage.growwmf.in/compliance_docs/Downloads/KIM/KIM_Groww%20Largecap%20Fund.pdf",
+      "updated_at": "Official KIM PDF"
+    },
+    "min_lumpsum": {
+      "answer": "The minimum lumpsum investment for Groww Large Cap Fund is Rs. 500 and in multiples of Rs. 500 thereafter. The minimum additional investment is also Rs. 500 and in multiples of Rs. 500 thereafter.",
+      "source_id": "groww-kim-large-cap",
+      "source_title": "KIM - Groww Large Cap Fund",
+      "source_url": "https://assets-netstorage.growwmf.in/compliance_docs/Downloads/KIM/KIM_Groww%20Largecap%20Fund.pdf",
+      "updated_at": "Official KIM PDF"
+    },
+    "plans_options": {
+      "answer": "Groww Large Cap Fund offers Regular Plan and Direct Plan. Each plan has Growth and IDCW (Income Distribution cum Capital Withdrawal) options.",
+      "source_id": "groww-kim-large-cap",
+      "source_title": "KIM - Groww Large Cap Fund",
+      "source_url": "https://assets-netstorage.growwmf.in/compliance_docs/Downloads/KIM/KIM_Groww%20Largecap%20Fund.pdf",
+      "updated_at": "Official KIM PDF"
+    }
+  },
+  "Groww ELSS Tax Saver Fund": {
+    "expense_ratio": {
+      "answer": "The Total Expense Ratio (TER) of Groww ELSS Tax Saver Fund is 0.80% p.a. for Direct Plan and 2.25% p.a. for Regular Plan (as per revised TER notice).",
+      "source_id": "groww-ter-elss",
+      "source_title": "Notice - Change in TER - Groww ELSS Tax Saver Fund",
+      "source_url": "https://assets-netstorage.growwmf.in/compliance_docs/Downloads/Expense%20Ratio/Notice%20-%20Change%20in%20TER/2025%20-%202026/07.%20Notice%20-%20Change%20in%20TER_Groww%20ELSS%20Tax%20Saver%20Fund.pdf",
+      "updated_at": "2025-2026 TER notice"
+    },
+    "exit_load": {
+      "answer": "Groww ELSS Tax Saver Fund has Nil exit load. However, a statutory lock-in period of 3 years applies to all investments as per ELSS regulations.",
+      "source_id": "groww-sid-elss",
+      "source_title": "SID - Groww ELSS Tax Saver Fund",
+      "source_url": "https://assets-netstorage.growwmf.in/compliance_docs/Downloads/SID/SID_Groww%20ELSS%20Tax%20Saver%20Fund.pdf",
+      "updated_at": "Official SID PDF"
+    },
+    "benchmark": {
+      "answer": "The benchmark for Groww ELSS Tax Saver Fund is Nifty 500 - TRI (Total Return Index).",
+      "source_id": "groww-kim-elss",
+      "source_title": "KIM - Groww ELSS Tax Saver Fund",
+      "source_url": "https://assets-netstorage.growwmf.in/compliance_docs/Downloads/KIM/KIM_Groww%20ELSS%20Tax%20Saver%20Fund.pdf",
+      "updated_at": "Official KIM PDF"
+    },
+    "riskometer": {
+      "answer": "The Riskometer of Groww ELSS Tax Saver Fund is at Very High Risk. The Benchmark Riskometer is also at Very High Risk.",
+      "source_id": "groww-kim-elss",
+      "source_title": "KIM - Groww ELSS Tax Saver Fund",
+      "source_url": "https://assets-netstorage.growwmf.in/compliance_docs/Downloads/KIM/KIM_Groww%20ELSS%20Tax%20Saver%20Fund.pdf",
+      "updated_at": "Official KIM PDF"
+    },
+    "min_sip": {
+      "answer": "The minimum SIP amount for Groww ELSS Tax Saver Fund is Rs. 500 and in multiples of Rs. 500 thereafter.",
+      "source_id": "groww-kim-elss",
+      "source_title": "KIM - Groww ELSS Tax Saver Fund",
+      "source_url": "https://assets-netstorage.growwmf.in/compliance_docs/Downloads/KIM/KIM_Groww%20ELSS%20Tax%20Saver%20Fund.pdf",
+      "updated_at": "Official KIM PDF"
+    },
+    "lock_in": {
+      "answer": "Groww ELSS Tax Saver Fund has a statutory lock-in period of 3 years, as mandated for all ELSS (Equity Linked Saving Schemes) under the Income Tax Act.",
+      "source_id": "groww-kim-elss",
+      "source_title": "KIM - Groww ELSS Tax Saver Fund",
+      "source_url": "https://assets-netstorage.growwmf.in/compliance_docs/Downloads/KIM/KIM_Groww%20ELSS%20Tax%20Saver%20Fund.pdf",
+      "updated_at": "Official KIM PDF"
+    },
+    "fund_manager": {
+      "answer": "Groww ELSS Tax Saver Fund is managed by Mr. Paras Matalia and Mr. Nikhil Satam.",
+      "source_id": "groww-kim-elss",
+      "source_title": "KIM - Groww ELSS Tax Saver Fund",
+      "source_url": "https://assets-netstorage.growwmf.in/compliance_docs/Downloads/KIM/KIM_Groww%20ELSS%20Tax%20Saver%20Fund.pdf",
+      "updated_at": "Official KIM PDF"
+    },
+    "investment_objective": {
+      "answer": "The investment objective of Groww ELSS Tax Saver Fund is to generate long-term capital appreciation from a diversified portfolio of predominantly equity and equity-related securities. The scheme offers tax benefits under Section 80C of the Income Tax Act.",
+      "source_id": "groww-kim-elss",
+      "source_title": "KIM - Groww ELSS Tax Saver Fund",
+      "source_url": "https://assets-netstorage.growwmf.in/compliance_docs/Downloads/KIM/KIM_Groww%20ELSS%20Tax%20Saver%20Fund.pdf",
+      "updated_at": "Official KIM PDF"
+    },
+    "fund_type": {
+      "answer": "Groww ELSS Tax Saver Fund is an open-ended equity linked saving scheme with a statutory lock-in of 3 years and tax benefit under Section 80C.",
+      "source_id": "groww-kim-elss",
+      "source_title": "KIM - Groww ELSS Tax Saver Fund",
+      "source_url": "https://assets-netstorage.growwmf.in/compliance_docs/Downloads/KIM/KIM_Groww%20ELSS%20Tax%20Saver%20Fund.pdf",
+      "updated_at": "Official KIM PDF"
+    },
+    "min_lumpsum": {
+      "answer": "The minimum lumpsum investment for Groww ELSS Tax Saver Fund is Rs. 500 and in multiples of Rs. 500 thereafter.",
+      "source_id": "groww-sid-elss",
+      "source_title": "SID - Groww ELSS Tax Saver Fund",
+      "source_url": "https://assets-netstorage.growwmf.in/compliance_docs/Downloads/SID/SID_Groww%20ELSS%20Tax%20Saver%20Fund.pdf",
+      "updated_at": "Official SID PDF"
+    },
+    "plans_options": {
+      "answer": "Groww ELSS Tax Saver Fund offers Regular Plan and Direct Plan. Each plan has Growth and IDCW (Income Distribution cum Capital Withdrawal) options.",
+      "source_id": "groww-kim-elss",
+      "source_title": "KIM - Groww ELSS Tax Saver Fund",
+      "source_url": "https://assets-netstorage.growwmf.in/compliance_docs/Downloads/KIM/KIM_Groww%20ELSS%20Tax%20Saver%20Fund.pdf",
+      "updated_at": "Official KIM PDF"
+    }
+  },
+  "Groww Banking and Financial Services Fund": {
+    "expense_ratio": {
+      "answer": "As per the KIM, the maximum TER for Groww Banking and Financial Services Fund will not exceed 2.25% of the Scheme's daily net assets for Regular Plan. For the current exact Direct Plan TER, please refer to the latest factsheet at growwmf.in.",
+      "source_id": "groww-kim-banking-financial-services",
+      "source_title": "KIM - Groww Banking and Financial Services Fund",
+      "source_url": "https://assets-netstorage.growwmf.in/compliance_docs/Downloads/KIM/KIM_Groww%20Banking%20&%20Financial%20Servies%20Fund.pdf",
+      "updated_at": "Official KIM PDF"
+    },
+    "exit_load": {
+      "answer": "The exit load for Groww Banking and Financial Services Fund is 1.00% of applicable NAV if redeemed/switched out on or before 30 days from the date of allotment, and Nil if redeemed/switched out after 30 days from the date of allotment.",
+      "source_id": "groww-sid-banking-financial-services",
+      "source_title": "SID - Groww Banking and Financial Services Fund",
+      "source_url": "https://assets-netstorage.growwmf.in/compliance_docs/Downloads/SID/SID_Groww%20Banking%20and%20Financial%20services%20Fund.pdf",
+      "updated_at": "Official SID PDF"
+    },
+    "benchmark": {
+      "answer": "The benchmark for Groww Banking and Financial Services Fund is Nifty Financial Services - TRI (Total Return Index).",
+      "source_id": "groww-kim-banking-financial-services",
+      "source_title": "KIM - Groww Banking and Financial Services Fund",
+      "source_url": "https://assets-netstorage.growwmf.in/compliance_docs/Downloads/KIM/KIM_Groww%20Banking%20&%20Financial%20Servies%20Fund.pdf",
+      "updated_at": "Official KIM PDF"
+    },
+    "riskometer": {
+      "answer": "The Riskometer of Groww Banking and Financial Services Fund is at Very High Risk. The Benchmark Riskometer is also at Very High Risk.",
+      "source_id": "groww-kim-banking-financial-services",
+      "source_title": "KIM - Groww Banking and Financial Services Fund",
+      "source_url": "https://assets-netstorage.growwmf.in/compliance_docs/Downloads/KIM/KIM_Groww%20Banking%20&%20Financial%20Servies%20Fund.pdf",
+      "updated_at": "Official KIM PDF"
+    },
+    "min_sip": {
+      "answer": "The minimum SIP amount for Groww Banking and Financial Services Fund is Rs. 500 and in multiples of Rs. 1 thereafter.",
+      "source_id": "groww-sid-banking-financial-services",
+      "source_title": "SID - Groww Banking and Financial Services Fund",
+      "source_url": "https://assets-netstorage.growwmf.in/compliance_docs/Downloads/SID/SID_Groww%20Banking%20and%20Financial%20services%20Fund.pdf",
+      "updated_at": "Official SID PDF"
+    },
+    "lock_in": {
+      "answer": "Groww Banking and Financial Services Fund has no lock-in period. Units can be redeemed at any time, subject to applicable exit load.",
+      "source_id": "groww-kim-banking-financial-services",
+      "source_title": "KIM - Groww Banking and Financial Services Fund",
+      "source_url": "https://assets-netstorage.growwmf.in/compliance_docs/Downloads/KIM/KIM_Groww%20Banking%20&%20Financial%20Servies%20Fund.pdf",
+      "updated_at": "Official KIM PDF"
+    },
+    "fund_manager": {
+      "answer": "Groww Banking and Financial Services Fund is managed by Mr. Anupam Tiwari (Head - Equity) and Mr. Saptarshee Chatterjee (Assistant Fund Manager - Equity).",
+      "source_id": "groww-kim-large-cap",
+      "source_title": "KIM - Groww Large Cap Fund",
+      "source_url": "https://assets-netstorage.growwmf.in/compliance_docs/Downloads/KIM/KIM_Groww%20Largecap%20Fund.pdf",
+      "updated_at": "Official KIM PDF"
+    },
+    "investment_objective": {
+      "answer": "The investment objective of Groww Banking and Financial Services Fund is to generate long-term capital appreciation by investing predominantly in equity and equity-related instruments of companies engaged in the banking and financial services sector, including banks, NBFCs, insurance companies, asset management companies, capital market participants, and fintech players.",
+      "source_id": "groww-kim-banking-financial-services",
+      "source_title": "KIM - Groww Banking and Financial Services Fund",
+      "source_url": "https://assets-netstorage.growwmf.in/compliance_docs/Downloads/KIM/KIM_Groww%20Banking%20&%20Financial%20Servies%20Fund.pdf",
+      "updated_at": "Official KIM PDF"
+    },
+    "fund_type": {
+      "answer": "Groww Banking and Financial Services Fund is an open-ended equity scheme investing in banking and financial services related sectors. The date of inception is February 06, 2024.",
+      "source_id": "groww-kim-banking-financial-services",
+      "source_title": "KIM - Groww Banking and Financial Services Fund",
+      "source_url": "https://assets-netstorage.growwmf.in/compliance_docs/Downloads/KIM/KIM_Groww%20Banking%20&%20Financial%20Servies%20Fund.pdf",
+      "updated_at": "Official KIM PDF"
+    },
+    "min_lumpsum": {
+      "answer": "The minimum lumpsum investment for Groww Banking and Financial Services Fund is Rs. 500 and in multiples of Rs. 1 thereafter.",
+      "source_id": "groww-sid-banking-financial-services",
+      "source_title": "SID - Groww Banking and Financial Services Fund",
+      "source_url": "https://assets-netstorage.growwmf.in/compliance_docs/Downloads/SID/SID_Groww%20Banking%20and%20Financial%20services%20Fund.pdf",
+      "updated_at": "Official SID PDF"
+    },
+    "plans_options": {
+      "answer": "Groww Banking and Financial Services Fund offers Regular Plan and Direct Plan. Each plan has Growth and IDCW (Income Distribution cum Capital Withdrawal) options.",
+      "source_id": "groww-kim-banking-financial-services",
+      "source_title": "KIM - Groww Banking and Financial Services Fund",
+      "source_url": "https://assets-netstorage.growwmf.in/compliance_docs/Downloads/KIM/KIM_Groww%20Banking%20&%20Financial%20Servies%20Fund.pdf",
+      "updated_at": "Official KIM PDF"
+    }
+  },
+  "Groww Nifty 50 Index Fund": {
+    "expense_ratio": {
+      "answer": "The Total Expense Ratio (TER) of Groww Nifty 50 Index Fund is 0.30% p.a. for Direct Plan and 1.00% p.a. for Regular Plan (as per November 2025 factsheet).",
+      "source_id": "groww-factsheet-nov-2025",
+      "source_title": "Groww Monthly Factsheet - November 2025",
+      "source_url": "https://assets-netstorage.growwmf.in/compliance_docs/Downloads/Fact%20Sheet/2025%20-%202026/Monthly%20Factsheet%20-%20November%2025.pdf",
+      "updated_at": "November 2025"
+    },
+    "exit_load": {
+      "answer": "Groww Nifty 50 Index Fund has Nil exit load.",
+      "source_id": "groww-sid-nifty-50-index",
+      "source_title": "SID - Groww Nifty 50 Index Fund",
+      "source_url": "https://assets-netstorage.growwmf.in/compliance_docs/Downloads/SID/SID_Groww%20Nifty%2050%20Index%20Fund.pdf",
+      "updated_at": "Official SID PDF"
+    },
+    "benchmark": {
+      "answer": "The benchmark for Groww Nifty 50 Index Fund is Nifty 50 Index - TRI (Total Return Index).",
+      "source_id": "groww-kim-nifty-50-index",
+      "source_title": "KIM - Groww Nifty 50 Index Fund",
+      "source_url": "https://assets-netstorage.growwmf.in/compliance_docs/Downloads/KIM/KIM_Groww%20Nifty%2050%20Index%20Fund.pdf",
+      "updated_at": "Official KIM PDF"
+    },
+    "riskometer": {
+      "answer": "The Riskometer of Groww Nifty 50 Index Fund is at Very High Risk. The Benchmark Riskometer is also at Very High Risk.",
+      "source_id": "groww-kim-nifty-50-index",
+      "source_title": "KIM - Groww Nifty 50 Index Fund",
+      "source_url": "https://assets-netstorage.growwmf.in/compliance_docs/Downloads/KIM/KIM_Groww%20Nifty%2050%20Index%20Fund.pdf",
+      "updated_at": "Official KIM PDF"
+    },
+    "min_sip": {
+      "answer": "The minimum SIP amount for Groww Nifty 50 Index Fund is Rs. 500 and in multiples of Rs. 1 thereafter.",
+      "source_id": "groww-factsheet-nov-2025",
+      "source_title": "Groww Monthly Factsheet - November 2025",
+      "source_url": "https://assets-netstorage.growwmf.in/compliance_docs/Downloads/Fact%20Sheet/2025%20-%202026/Monthly%20Factsheet%20-%20November%2025.pdf",
+      "updated_at": "November 2025"
+    },
+    "lock_in": {
+      "answer": "Groww Nifty 50 Index Fund has no lock-in period. Units can be redeemed at any time with Nil exit load.",
+      "source_id": "groww-kim-nifty-50-index",
+      "source_title": "KIM - Groww Nifty 50 Index Fund",
+      "source_url": "https://assets-netstorage.growwmf.in/compliance_docs/Downloads/KIM/KIM_Groww%20Nifty%2050%20Index%20Fund.pdf",
+      "updated_at": "Official KIM PDF"
+    },
+    "fund_manager": {
+      "answer": "Groww Nifty 50 Index Fund is managed by Mr. Aakash Chauhan (Fund Manager for Passive Schemes and Dealer – Equity), Mr. Nikhil Satam, and Mr. Shashi Kumar (Fund Manager & Dealer – Equity).",
+      "source_id": "groww-factsheet-nov-2025",
+      "source_title": "Groww Monthly Factsheet - November 2025",
+      "source_url": "https://assets-netstorage.growwmf.in/compliance_docs/Downloads/Fact%20Sheet/2025%20-%202026/Monthly%20Factsheet%20-%20November%2025.pdf",
+      "updated_at": "November 2025"
+    },
+    "investment_objective": {
+      "answer": "The investment objective of Groww Nifty 50 Index Fund is to generate long-term capital growth by investing in securities of the Nifty 50 Index in the same proportion/weightage with an aim to provide returns before expenses that track the total return of Nifty 50 Index, subject to tracking errors.",
+      "source_id": "groww-kim-nifty-50-index",
+      "source_title": "KIM - Groww Nifty 50 Index Fund",
+      "source_url": "https://assets-netstorage.growwmf.in/compliance_docs/Downloads/KIM/KIM_Groww%20Nifty%2050%20Index%20Fund.pdf",
+      "updated_at": "Official KIM PDF"
+    },
+    "fund_type": {
+      "answer": "Groww Nifty 50 Index Fund is an open-ended scheme tracking the Nifty 50 Index - TRI.",
+      "source_id": "groww-kim-nifty-50-index",
+      "source_title": "KIM - Groww Nifty 50 Index Fund",
+      "source_url": "https://assets-netstorage.growwmf.in/compliance_docs/Downloads/KIM/KIM_Groww%20Nifty%2050%20Index%20Fund.pdf",
+      "updated_at": "Official KIM PDF"
+    },
+    "min_lumpsum": {
+      "answer": "The minimum lumpsum investment for Groww Nifty 50 Index Fund is Rs. 500 and in multiples of Rs. 1 thereafter.",
+      "source_id": "groww-factsheet-nov-2025",
+      "source_title": "Groww Monthly Factsheet - November 2025",
+      "source_url": "https://assets-netstorage.growwmf.in/compliance_docs/Downloads/Fact%20Sheet/2025%20-%202026/Monthly%20Factsheet%20-%20November%2025.pdf",
+      "updated_at": "November 2025"
+    },
+    "plans_options": {
+      "answer": "Groww Nifty 50 Index Fund offers Regular Plan and Direct Plan. Each plan has Growth and IDCW (Income Distribution cum Capital Withdrawal) options.",
+      "source_id": "groww-kim-nifty-50-index",
+      "source_title": "KIM - Groww Nifty 50 Index Fund",
+      "source_url": "https://assets-netstorage.growwmf.in/compliance_docs/Downloads/KIM/KIM_Groww%20Nifty%2050%20Index%20Fund.pdf",
+      "updated_at": "Official KIM PDF"
+    }
+  },
+  "_general": {
+    "statement_guidance": {
+      "answer": "Groww Mutual Fund provides a Consolidated Account Statement (CAS) to investors. CAS is dispatched to all active investors monthly for folios with transactions. For folios without transactions, CAS is sent half-yearly (September/March). CAS is not sent for folios where PAN details are not updated. On specific request, the account statement is provided within 5 business days. You can also request CAS through AMFI/CAMS/KFintech portals.",
+      "source_id": "groww-kim-large-cap",
+      "source_title": "KIM - Groww Large Cap Fund",
+      "source_url": "https://assets-netstorage.growwmf.in/compliance_docs/Downloads/KIM/KIM_Groww%20Largecap%20Fund.pdf",
+      "updated_at": "Official KIM PDF"
+    },
+    "registrar": {
+      "answer": "The Registrar and Transfer Agent for Groww Mutual Fund schemes is KFin Technologies Limited (formerly KFintech / Karvy Fintech).",
+      "source_id": "groww-home",
+      "source_title": "Groww Mutual Fund Official Home",
+      "source_url": "https://www.growwmf.in/",
+      "updated_at": "Official live page"
+    },
+    "grievance": {
+      "answer": "For grievance redressal, investors can contact Groww Mutual Fund through their official grievance redressal mechanism at growwmf.in/investor/grievance-redressal or call the toll-free number 8050180222.",
+      "source_id": "groww-grievance-redressal",
+      "source_title": "Groww Mutual Fund Grievance Redressal",
+      "source_url": "https://www.growwmf.in/investor/grievance-redressal",
+      "updated_at": "Official live page"
+    }
+  }
+}

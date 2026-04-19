@@ -35,7 +35,7 @@ class Settings(BaseSettings):
     embeddings_model: str = "BAAI/bge-small-en-v1.5"
     request_timeout_seconds: int = 20
     retrieval_k: int = 8
-    max_answer_sentences: int = 3
+    max_answer_sentences: int = 5
     source_manifest_path: Path = BASE_DIR / "data" / "sources" / "groww_sources.json"
     vector_index_path: Path = BASE_DIR / "data" / "index" / "faiss"
     chunk_store_path: Path = BASE_DIR / "data" / "index" / "chunks.json"

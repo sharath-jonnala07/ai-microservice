@@ -5,6 +5,7 @@ import re
 
 from app.core.config import Settings
 from app.models.schemas import ChunkRecord, Citation
+from app.services.question_classifier import expand_query_with_synonyms
 from app.services.vector_index import VectorIndexRepository
 
 
@@ -17,8 +18,9 @@ class RetrievedSource:
 PROCESS_TYPES = {"support_process", "statement_guidance", "forms_page", "portal", "reference_links"}
 SCHEME_FACT_TYPES = {"kim", "sid", "factsheet", "ter_notice", "ter_reference"}
 PROCESS_PATTERN = re.compile(r"download|statement|capital gains|tax|account statement|cas")
-EXPENSE_PATTERN = re.compile(r"expense ratio|ter")
-SCHEME_FACT_PATTERN = re.compile(r"exit load|minimum sip|\bsip\b|lock-in|lock in|benchmark|riskometer")
+EXPENSE_PATTERN = re.compile(r"expense ratio|ter|total expense")
+SCHEME_FACT_PATTERN = re.compile(r"exit load|minimum sip|\bsip\b|lock-in|lock in|benchmark|riskometer|risk-o-meter|fund manager|investment objective|fund type|plans and options|minimum investment|min lumpsum|aum|assets under management|fund size")
+FUND_MANAGER_PATTERN = re.compile(r"fund manager|managed by|who manages|portfolio manager")
 
 
 class SourceRetriever:
@@ -30,7 +32,8 @@ class SourceRetriever:
         return self._repository.is_ready()
 
     def retrieve(self, question: str) -> RetrievedSource | None:
-        hits = self._repository.search(question, k=max(self._settings.retrieval_k * 3, 24))
+        expanded_question = expand_query_with_synonyms(question)
+        hits = self._repository.search(expanded_question, k=max(self._settings.retrieval_k * 3, 24))
         if not hits:
             return None
 
@@ -95,5 +98,11 @@ class SourceRetriever:
                 boost += 5.0
             elif chunk.document_type == "factsheet":
                 boost += 3.0
+
+        if FUND_MANAGER_PATTERN.search(lowered_question):
+            if chunk.document_type == "factsheet":
+                boost += 7.0
+            elif chunk.document_type in {"kim", "sid"}:
+                boost += 4.0
 
         return boost
